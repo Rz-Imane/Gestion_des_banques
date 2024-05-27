@@ -1,0 +1,25 @@
+version: '3.8'
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8087:8087"
+    depends_on:
+      - xampp
+
+  xampp:
+    image: tomsik68/xampp
+    ports:
+      - "80:80"
+      - "443:443"
+      - "3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+    volumes:
+      - xampp_data:/opt/lampp
+
+volumes:
+  xampp_data:
